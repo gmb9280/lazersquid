@@ -5,16 +5,16 @@ var game = game || {};
 game.lazersquid = 
 {
 	// Constant properties
-	WIDTH: 640;
-	HEIGHT: 860;
+	WIDTH: 640,
+	HEIGHT: 860,
 	
 	// variable properties
-	canvas : undefined;
-	ctx : undefined;
-	dt : 1/60.0;
-	harmon : undefined;
+	canvas : undefined,
+	ctx : undefined,
+	dt : 1/60.0,
+	harmon : undefined,
 	
-	lazer : undefined;
+	lazer : undefined,
 	
 	init : function()
 	{
@@ -60,9 +60,13 @@ game.lazersquid =
 		drawHUD();
 		
 		// Loop - calls update at 60fps
-		game.animationID = requestAnimationFrame(this.update.bind(this));
+		
 		
 		*/
+		game.draw.backgroundGradient(this.ctx, this.WIDTH, this.HEIGHT);
+		console.log("Drawing");
+		game.animationID = requestAnimationFrame(this.update.bind(this));
+		
 	},
 	
 	drawPauseScreen : function(ctx)

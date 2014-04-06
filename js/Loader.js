@@ -14,6 +14,7 @@ Modernizr.load(
 			console.log("Loading complete with Modernizr.");
 			// and other stuff you might need upon everything having been loaded
 			// init game
+			game.lazersquid.init();
 		}
 	
 	}
