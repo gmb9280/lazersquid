@@ -28,6 +28,13 @@ game.lazersquid =
 		this.ctx = this.canvas.getContext('2d');
 		
 		// set up Harmon
+		var img = new Image();
+		
+		img.src = game.IMAGES['harmonImg'];
+		
+		this.harmon = game.harmon;
+		this.harmon.image = img;
+		this.harmon.init();
 		
 		// set up Lazer
 		
@@ -40,12 +47,13 @@ game.lazersquid =
 		
 		game.draw.clear(this.ctx, 0,0, this.WIDTH, this.HEIGHT);
 		
-		if (!game.paused)
+		if (game.paused)
 		{
 			console.log("paused");
 			this.drawPauseScreen(this.ctx);
 			return;
 		}
+
 
 		/*
 		// move sprites and such
@@ -88,6 +96,7 @@ game.lazersquid =
 	
 	drawSprites : function()
 	{
+		this.harmon.draw(this.ctx);
 	},
 	
 	moveSprites : function()

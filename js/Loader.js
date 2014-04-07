@@ -1,13 +1,36 @@
+"use strict";
+
+var game = game || {};
+
+// CONSTANTS
+game.KEYBOARD = {
+	"KEY_LEFT": 37, 
+	"KEY_UP": 38, 
+	"KEY_RIGHT": 39, 
+	"KEY_DOWN": 40,
+	"KEY_SPACE": 32
+};
+
+game.IMAGES = 
+{
+	harmonImg : "imgs/harmon_spritesheet.png", 
+	jellyImg : "imgs/jelly.png"
+};
+
 
 
 Modernizr.load(
 	{
-		load: [
+		load: 
+		[
 			'http://code.createjs.com/soundjs-0.5.2.min.js',
 			'js/SoundLoader.js',
 			'js/lazersquid.js',
-			'js/draw.js'
-			],
+			'js/draw.js',
+			'js/harmon.js',
+			game.IMAGES['harmonImg'],
+			game.IMAGES['jellyImg']
+		],
 			
 		complete: function()
 		{
