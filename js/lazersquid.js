@@ -6,7 +6,7 @@ game.lazersquid =
 {
 	// Constant properties
 	WIDTH: 640,
-	HEIGHT: 860,
+	HEIGHT: 760,
 	
 	// variable properties
 	canvas : undefined,
@@ -15,6 +15,8 @@ game.lazersquid =
 	harmon : undefined,
 	
 	lazer : undefined,
+	
+	paused : false,
 	
 	init : function()
 	{
@@ -35,15 +37,17 @@ game.lazersquid =
 	
 	update : function()
 	{
-		/*
+		
 		game.draw.clear(this.ctx, 0,0, this.WIDTH, this.HEIGHT);
 		
-		// if (paused)
+		if (!game.paused)
 		{
+			console.log("paused");
 			this.drawPauseScreen(this.ctx);
 			return;
 		}
-		
+
+		/*
 		// move sprites and such
 		this.moveSprites();
 		
@@ -67,16 +71,18 @@ game.lazersquid =
 		console.log("Drawing");
 		game.animationID = requestAnimationFrame(this.update.bind(this));
 		
+		this.drawSprites();
+		
+		this.drawHUD();
 	},
 	
 	drawPauseScreen : function(ctx)
 	{
-	
 		ctx.save();
 		game.draw.backgroundGradient(this.ctx, this.WIDTH, this.HEIGHT);
 		ctx.textAlign = "center";
 		ctx.textBaseline = "middle";
-		game.draw.text(this.ctx, "PAUSED", this.WIDTH/2, this.HEIGHT/4, 60, "black");
+		game.draw.text(this.ctx, "PAUSED", this.WIDTH/2, this.HEIGHT/2, 60, "white");
 		ctx.restore();
 	},
 	
@@ -86,5 +92,10 @@ game.lazersquid =
 	
 	moveSprites : function()
 	{
+	},
+	
+	drawHUD : function()
+	{
+	
 	}
 };
