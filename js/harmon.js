@@ -8,8 +8,8 @@ game.harmon =
 {
 	x : game.WIDTH/2,
 	y : game.HEIGHT/2,
-	width : 60, 
-	height : 60,
+	width : 100, 
+	height : 100,
 	lives: 5,
 	
 	// physics stuff
@@ -29,9 +29,9 @@ game.harmon =
 	
 	init : function()
 	{
-		this.x = 200;
-		this.y = 200;
-		this.width = 60;
+		this.x = 300;
+		this.y = 500;
+		this.width = 100;
 		this.velocx = this.velocy = this.accelx = this.accely = this.friction = 0;
 		console.log("New Harmon created at " + this.x + ", " + this.y);
 	},
@@ -43,12 +43,12 @@ game.harmon =
 		if(this.image == undefined)
 		{
 			//filler rect
-			game.draw.rect(ctx, this.x - half, this.y - half, this.width, this.width, "white");
+			game.draw.rect(ctx,0,0,100, 100,this.x - half, this.y - half, this.width, this.width, "white");
 		}
 		else
 		{
 		console.log("Image {" + this.image + "} " + this.x+", " + this.y);
-			ctx.drawImage(this.image, this.x - half, this.y - half, this.width, this.width);
+			ctx.drawImage(this.image,0,100,100,100, this.x - half, this.y - half, this.width, this.width);
 		}
 		
 	}
