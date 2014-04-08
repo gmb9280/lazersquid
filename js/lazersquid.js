@@ -76,7 +76,7 @@ game.lazersquid =
 		
 		*/
 		game.draw.backgroundGradient(this.ctx, this.WIDTH, this.HEIGHT);
-		console.log("Drawing");
+		//console.log("Drawing");
 		game.animationID = requestAnimationFrame(this.update.bind(this));
 		
 		this.drawSprites();

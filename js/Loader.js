@@ -13,8 +13,8 @@ game.KEYBOARD = {
 
 game.IMAGES = 
 {
-	harmonImg : "imgs/harmon_spritesheet.png", 
-	jellyImg : "imgs/jelly.png"
+	harmonImg : "js/imgs/harmon_spritesheet.png", 
+	jellyImg : "js/imgs/jelly.png"
 };
 
 

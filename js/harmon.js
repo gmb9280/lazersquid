@@ -29,25 +29,25 @@ game.harmon =
 	
 	init : function()
 	{
-		x = game.WIDTH/2;
-		y = game.HEIGHT/2;
-		width = 60;
+		this.x = 200;
+		this.y = 200;
+		this.width = 60;
 		this.velocx = this.velocy = this.accelx = this.accely = this.friction = 0;
-		console.log("New Harmon created at " + x + ", " + y);
+		console.log("New Harmon created at " + this.x + ", " + this.y);
 	},
 	
 	draw : function(ctx)
 	{
 		var half = this.width/2;
 		
-		if(!this.image)
+		if(this.image == undefined)
 		{
 			//filler rect
 			game.draw.rect(ctx, this.x - half, this.y - half, this.width, this.width, "white");
 		}
 		else
 		{
-		console.log("IMAGE?!" + this.x+", " + this.y);
+		console.log("Image {" + this.image + "} " + this.x+", " + this.y);
 			ctx.drawImage(this.image, this.x - half, this.y - half, this.width, this.width);
 		}
 		
