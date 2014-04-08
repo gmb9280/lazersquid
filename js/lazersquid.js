@@ -18,6 +18,7 @@ game.lazersquid =
 	
 	paused : false,
 	
+	score : 0,
 	init : function()
 	{
 		this.canvas = document.querySelector('canvas');
@@ -26,7 +27,7 @@ game.lazersquid =
 		this.canvas.height = this.HEIGHT; 
 		
 		this.ctx = this.canvas.getContext('2d');
-		
+		this.score = 0;
 		// set up Harmon
 		var img = new Image();
 		
@@ -34,7 +35,7 @@ game.lazersquid =
 		
 		this.harmon = game.harmon;
 		this.harmon.image = img;
-		this.harmon.init();
+		this.harmon.init(this.WIDTH/2, this.HEIGHT/2);
 		
 		// set up Lazer
 		
@@ -105,6 +106,10 @@ game.lazersquid =
 	
 	drawHUD : function()
 	{
-	
+		this.ctx.textAlign = "left";
+		game.draw.text(this.ctx, "Lives: " + this.harmon.lives, 5, 20, 20, "black");
+		
+		this.ctx.textAlign = "right"; 
+		game.draw.text(this.ctx, "Score: " +this.score, this.WIDTH - 5, 20,20, "black");
 	}
 };

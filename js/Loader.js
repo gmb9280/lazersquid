@@ -25,9 +25,9 @@ Modernizr.load(
 		[
 			'http://code.createjs.com/soundjs-0.5.2.min.js',
 			'js/SoundLoader.js',
-			'js/lazersquid.js',
-			'js/draw.js',
 			'js/harmon.js',
+			'js/draw.js',
+			'js/lazersquid.js',			
 			game.IMAGES['harmonImg'],
 			game.IMAGES['jellyImg']
 		],

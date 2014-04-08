@@ -27,11 +27,21 @@ game.harmon =
 	
 	lazer : undefined, 
 	
-	init : function()
+	STATE_IDLE = 0,
+	STATE_SHOOM = 1,
+	STATE_DRAG = 2,
+	STATE_STRAFE_LEFT = 3, 
+	STATE_STRAFE_RIGHT = 4,
+	STATE_POWERUP = 5,
+	STATE_FIRE = 6,
+	
+	SQUIDSTATE = 0,
+	
+	init : function(_x,_y)
 	{
-		this.x = 300;
-		this.y = 500;
 		this.width = 100;
+		this.x = _x;
+		this.y = _y;
 		this.velocx = this.velocy = this.accelx = this.accely = this.friction = 0;
 		console.log("New Harmon created at " + this.x + ", " + this.y);
 	},
@@ -47,7 +57,7 @@ game.harmon =
 		}
 		else
 		{
-		console.log("Image {" + this.image + "} " + this.x+", " + this.y);
+			console.log("Image {" + this.image + "} " + this.x+", " + this.y);
 			ctx.drawImage(this.image,0,100,100,100, this.x - half, this.y - half, this.width, this.width);
 		}
 		
