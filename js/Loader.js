@@ -65,7 +65,7 @@ Modernizr.load(
 			
 			
 			// init game
-			game.lazersquid.init(); // fails
+			game.lazersquid.init();
 		},
 		
 		

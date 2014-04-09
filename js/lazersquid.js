@@ -18,6 +18,8 @@ game.lazersquid =
 	
 	paused : false,
 	
+	fixed : false,
+	
 	score : 0,
 	init : function()
 	{
@@ -37,6 +39,7 @@ game.lazersquid =
 		this.harmon.image = img;
 		this.harmon.init(this.WIDTH/2, this.HEIGHT/2);
 		
+		
 		// set up Lazer
 		
 		// Draw the screen
@@ -45,6 +48,7 @@ game.lazersquid =
 	
 	update : function()
 	{
+		if(this.fixed == false){ this.paused =true;}
 		
 		game.draw.clear(this.ctx, 0,0, this.WIDTH, this.HEIGHT);
 		
