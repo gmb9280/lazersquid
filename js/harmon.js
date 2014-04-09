@@ -35,6 +35,10 @@ game.harmon =
 	
 	SQUIDSTATE: 0,
 	
+	
+	fireDelay : 3,
+	
+	curFireDelay : 0,
 	frame : 0,
 	
 	friction: .8,
@@ -77,13 +81,13 @@ game.harmon =
 	
 	update : function()
 	{
-		console.log("velocity: " + this.velocx + ", " + this.velocy + " state: " + this.SQUIDSTATE );
+		//console.log("velocity: " + this.velocx + ", " + this.velocy + " state: " + this.SQUIDSTATE );
 
 	
 		// Handles animation 
 		if(this.SQUIDSTATE == this.STATE_IDLE)
 		{
-			console.log("Idling");
+			//console.log("Idling");
 			
 			// if we need to rollover
 			if(this.frameDelay == 1)
@@ -111,7 +115,7 @@ game.harmon =
 		else if(this.SQUIDSTATE == this.STATE_SHOOM)
 		{
 			this.frame = 0;
-			if(this.velocy >= -.1 && this.velocy !=0)
+			if(this.velocy >= -.3 && this.velocy !=0)
 			{
 				this.SQUIDSTATE = this.STATE_IDLE;
 				console.log("switching state");
@@ -121,12 +125,16 @@ game.harmon =
 		else if(this.SQUIDSTATE == this.STATE_STRAFE_LEFT || this.STATE_STRAFE_RIGHT == this.SQUIDSTATE)
 		{
 			this.frame = 0;
-
+			if(this.velocx >= -.3 || this.velocx <= .3)
+			{
+				this.SQUIDSTATE = this.STATE_IDLE;
+			
+			}
 		}
 		else if(this.SQUIDSTATE == this.STATE_DRAG)
 		{
 			this.frame = 2;
-			if(this.velocy <= .1 && this.velocy !=0)
+			if(this.velocy <= .3 && this.velocy !=0)
 			{
 				console.log("switching state");
 				this.SQUIDSTATE = this.STATE_IDLE;
@@ -138,6 +146,20 @@ game.harmon =
 		{
 			this.frame = 3;
 		}
+		
+		else if(this.SQUIDSTATE == this.STATE_FIRE)
+		{
+			if(this.curFireDelay < this.fireDelay)
+			{
+				this.curFireDelay ++;
+			}
+			else if(this.curFireDelay == this.fireDelay)
+			{
+				this.curFireDelay = 0;
+				this.SQUIDSTATE = this.STATE_IDLE;
+			}
+		}
+		
 		
 		// physics stuff
 		this.friction = .95;
@@ -154,6 +176,9 @@ game.harmon =
 	
 	shoom : function(dt)
 	{
+		console.log("should play sound");
+		var sh = createjs.Sound.play("shoom", {loop:0, volume:1});
+		sh.play();
 		this.velocy = -(this.BOOST_AMT_VERT);
 		this.SQUIDSTATE = this.STATE_SHOOM;
 	},
@@ -172,10 +197,23 @@ game.harmon =
 	
 	drag : function(dt)
 	{
-		this.velocy = this.BOOST_AMT_VERT;
+		this.velocy = this.BOOST_AMT_HORZ;
 		this.SQUIDSTATE = this.STATE_DRAG;
-	}
-
+	},
 	
+
+	charge : function(dt)
+	{
+		console.log("Chargin....");
+		this.SQUIDSTATE = this.STATE_POWERUP; 
+	},
+	
+	fire : function(dt)
+	{
+		// release the kraken -- err, lazer.
+		console.log("Fire");
+		this.SQUIDSTATE = this.STATE_FIRE;
+		this.frame = 0;
+	}
 	
 };

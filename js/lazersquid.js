@@ -122,6 +122,16 @@ game.lazersquid =
 		{
 			this.harmon.drag(this.dt);
 		}
+		if(game.keydown[game.KEYBOARD.KEY_SPACE])
+		{
+			this.harmon.charge(this.dt);
+		}
+		if(this.harmon.SQUIDSTATE == this.harmon.STATE_POWERUP && (!game.keydown[game.KEYBOARD.KEY_SPACE]))
+		{
+			// fire
+			this.harmon.fire(this.dt);
+		}
+
 		
 		//keep Harmon on screen
 		// clamp(val, min, max);
