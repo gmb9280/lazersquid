@@ -18,10 +18,8 @@ game.harmon =
 	accelx : 0,
 	accely : 0,
 	
-	friction : 0,
-	
-	BOOST_AMT_HORZ : 1, // amount that Harmon will move at a time in the X
-	BOOST_AMT_VERT : 2, // amount that Harmon will move at a time in the Y (shoom!)
+	BOOST_AMT_HORZ : 3, // amount that Harmon will move at a time in the X
+	BOOST_AMT_VERT : 6, // amount that Harmon will move at a time in the Y (shoom!)
 	
 	image : undefined,
 	
@@ -39,6 +37,8 @@ game.harmon =
 	
 	frame : 0,
 	
+	friction: .8,
+	
 	NUM_FRAMES : 2,
 	
 	frameDelay : 1/5,
@@ -50,6 +50,7 @@ game.harmon =
 		this.width = 100;
 		this.x = _x;
 		this.y = _y;
+		this.friction = .99;
 		this.frame = 0;
 		this.frameDelay = 0;
 		this.frameDelayInc = 1/32;
@@ -76,6 +77,9 @@ game.harmon =
 	
 	update : function()
 	{
+		console.log("velocity: " + this.velocx + ", " + this.velocy + " state: " + this.SQUIDSTATE );
+
+	
 		// Handles animation 
 		if(this.SQUIDSTATE == this.STATE_IDLE)
 		{
@@ -107,21 +111,70 @@ game.harmon =
 		else if(this.SQUIDSTATE == this.STATE_SHOOM)
 		{
 			this.frame = 0;
+			if(this.velocy >= -.1 && this.velocy !=0)
+			{
+				this.SQUIDSTATE = this.STATE_IDLE;
+				console.log("switching state");
+				this.velocx = this.velocy = 0;	
+			}
 		}
 		else if(this.SQUIDSTATE == this.STATE_STRAFE_LEFT || this.STATE_STRAFE_RIGHT == this.SQUIDSTATE)
 		{
 			this.frame = 0;
+
 		}
 		else if(this.SQUIDSTATE == this.STATE_DRAG)
 		{
 			this.frame = 2;
+			if(this.velocy <= .1 && this.velocy !=0)
+			{
+				console.log("switching state");
+				this.SQUIDSTATE = this.STATE_IDLE;
+				this.velocx = this.velocy = 0;
+				
+			}
 		}
 		else if(this.SQUIDSTATE == this.STATE_POWERUP)
 		{
 			this.frame = 3;
 		}
-	}
+		
+		// physics stuff
+		this.friction = .95;
+		this.velocx *= this.friction;
+		this.velocy *= this.friction;
+		
+		this.x += this.velocx; 
+		this.y += this.velocy;
+		
+		
+		
+		
+	},
 	
+	shoom : function(dt)
+	{
+		this.velocy = -(this.BOOST_AMT_VERT);
+		this.SQUIDSTATE = this.STATE_SHOOM;
+	},
+	
+	strafeRight : function(dt)
+	{
+		this.velocx = (this.BOOST_AMT_HORZ);
+		this.SQUIDSTATE = this.STATE_STRAFE_RIGHT;
+	},
+	
+	strafeLeft : function(dt)
+	{
+		this.velocx = -(this.BOOST_AMT_HORZ);
+		this.SQUIDSTATE = this.STATE_STRAFE_LEFT;
+	},
+	
+	drag : function(dt)
+	{
+		this.velocy = this.BOOST_AMT_VERT;
+		this.SQUIDSTATE = this.STATE_DRAG;
+	}
 
 	
 	

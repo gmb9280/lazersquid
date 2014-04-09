@@ -102,6 +102,33 @@ game.lazersquid =
 	
 	moveSprites : function()
 	{
+		if(game.keydown[game.KEYBOARD.KEY_LEFT])
+		{
+			this.harmon.strafeLeft(this.dt);
+		}
+		if(game.keydown[game.KEYBOARD.KEY_RIGHT])
+		{
+			this.harmon.strafeRight(this.dt);
+		}
+		if(game.keydown[game.KEYBOARD.KEY_UP])
+		{
+			this.harmon.shoom(this.dt);
+		}
+		if(game.keydown[game.KEYBOARD.KEY_DOWN])
+		{
+			this.harmon.drag(this.dt);
+		}
+		
+		//keep Harmon on screen
+		// clamp(val, min, max);
+		var paddingX = this.harmon.width/2;
+		this.harmon.x = game.utilities.clamp(this.harmon.x, paddingX, this.WIDTH - paddingX);
+		
+		var paddingY = this.harmon.height/2;
+		this.harmon.y = game.utilities.clamp(this.harmon.y, paddingY, this.HEIGHT - paddingY);
+
+	
+	
 		this.harmon.update();
 	},
 	
