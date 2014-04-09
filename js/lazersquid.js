@@ -81,7 +81,7 @@ game.lazersquid =
 		game.animationID = requestAnimationFrame(this.update.bind(this));
 		
 		this.drawSprites();
-		
+		this.moveSprites();
 		this.drawHUD();
 	},
 	
@@ -102,6 +102,7 @@ game.lazersquid =
 	
 	moveSprites : function()
 	{
+		this.harmon.update();
 	},
 	
 	drawHUD : function()
