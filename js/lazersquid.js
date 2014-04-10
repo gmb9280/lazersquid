@@ -16,6 +16,7 @@ game.lazersquid =
 	
 	lazer : undefined,
 	
+	bgimg : undefined,
 	paused : false,
 	
 	fixed : false,
@@ -39,6 +40,9 @@ game.lazersquid =
 		this.harmon.image = img;
 		this.harmon.init(this.WIDTH/2, this.HEIGHT/2);
 		
+		var bgimg = new Image();
+		bgimg.src = game.IMAGES['bg'];
+		this.bgimg = bgimg;
 		
 		// set up Lazer
 		
@@ -80,12 +84,13 @@ game.lazersquid =
 		
 		
 		*/
-		game.draw.backgroundGradient(this.ctx, this.WIDTH, this.HEIGHT);
+		//game.draw.backgroundGradient(this.ctx, this.WIDTH, this.HEIGHT);
+		this.drawBG();
 		//console.log("Drawing");
 		game.animationID = requestAnimationFrame(this.update.bind(this));
 		
 		this.drawSprites();
-		this.moveSprites();
+		this.moveSprites() ;
 		this.drawHUD();
 	},
 	
@@ -144,6 +149,16 @@ game.lazersquid =
 	
 	
 		this.harmon.update();
+	},
+	
+	drawBG : function()
+	{
+		if(!this.bgimg)
+		{
+			this.game.draw.backgroundGradient(this.ctx, this.WIDTH, this.HEIGHT);
+		}
+		else{
+		this.ctx.drawImage(this.bgimg, 0,0, this.WIDTH, this.HEIGHT); }
 	},
 	
 	drawHUD : function()

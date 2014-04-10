@@ -35,6 +35,7 @@ game.harmon =
 	
 	SQUIDSTATE: 0,
 	
+	lazers : [],
 	
 	fireDelay : 3,
 	
@@ -51,6 +52,7 @@ game.harmon =
 	
 	init : function(_x,_y)
 	{
+		this.lazers = new Array();
 		this.width = 100;
 		this.x = _x;
 		this.y = _y;
@@ -83,7 +85,18 @@ game.harmon =
 	{
 		//console.log("velocity: " + this.velocx + ", " + this.velocy + " state: " + this.SQUIDSTATE );
 
-	
+		// handles lazers
+		if(this.lazers.length == 0){ //no lazers 
+		}
+		else
+		{
+			for(var i = 0; i< this.lazers.length; i++)
+			{
+				console.log(i + "/" + this.lazers.length + " lazers...");
+			}
+		}
+		
+		
 		// Handles animation 
 		if(this.SQUIDSTATE == this.STATE_IDLE)
 		{
@@ -212,8 +225,12 @@ game.harmon =
 	{
 		// release the kraken -- err, lazer.
 		console.log("Fire");
+		var sh = createjs.Sound.play("l1", {loop:0, volume:1});
 		this.SQUIDSTATE = this.STATE_FIRE;
 		this.frame = 0;
+		
+		// add a lazer to the lazers
+		//this.lazers.add(var 
 	}
 	
 };

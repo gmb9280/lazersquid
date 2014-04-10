@@ -14,7 +14,8 @@ game.KEYBOARD = {
 game.IMAGES = 
 {
 	harmonImg : "js/imgs/harmon_spritesheet.png", 
-	jellyImg : "js/imgs/jelly.png"
+	jellyImg : "js/imgs/jelly.png",
+	bg : "js/imgs/bg.png"
 };
 
 
@@ -31,7 +32,8 @@ Modernizr.load(
 			'js/lazersquid.js',		
 			
 			game.IMAGES['harmonImg'],
-			game.IMAGES['jellyImg']
+			game.IMAGES['jellyImg'],
+			game.IMAGES['bg']
 		],
 			
 		complete: function()
