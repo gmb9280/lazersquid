@@ -23,7 +23,7 @@ game.harmon =
 	
 	image : undefined,
 	
-	lazer : undefined, 
+	lazer : undefined, // the type of lazer
 	
 	STATE_IDLE : 0,
 	STATE_SHOOM : 1,
@@ -35,7 +35,9 @@ game.harmon =
 	
 	SQUIDSTATE: 0,
 	
-	lazers : [],
+	lazers : [], 
+	
+	LAZER_SPEED : 1,
 	
 	fireDelay : 3,
 	
@@ -79,6 +81,22 @@ game.harmon =
 			ctx.drawImage(this.image,0, 0  + (this.frame * this.width),100,100, this.x - half, this.y - half, this.width, this.width);
 		}
 		
+		// draw bullets
+		//this.drawBullets(ctx);
+		
+	},
+	
+	// Makes a bullet and adds it to the bullets array (private)
+	createBullet : function(x_, y_, speed_)
+	{
+		/*var b_ = {x: x_, y:y_, speed: speed_};
+		*/
+		this.lazers.push("lazer?");
+	},
+	
+	drawBullet : function(ctx)
+	{
+		game.draw.rect(ctx, this.lazers[i].x, this.lazers[i].y, 3,3, "red");		
 	},
 	
 	update : function()
@@ -181,17 +199,16 @@ game.harmon =
 		
 		this.x += this.velocx; 
 		this.y += this.velocy;
-		
-		
-		
-		
 	},
 	
 	shoom : function(dt)
 	{
 		console.log("should play sound");
-		var sh = createjs.Sound.play("shoom", {loop:0, volume:1});
-		sh.play();
+		if(this.SQUIDSTATE != this.STATE_SHOOM)
+		{
+			var sh = createjs.Sound.play("shoom", {loop:0, volume:1});
+			sh.play();
+		}
 		this.velocy = -(this.BOOST_AMT_VERT);
 		this.SQUIDSTATE = this.STATE_SHOOM;
 	},
@@ -230,7 +247,8 @@ game.harmon =
 		this.frame = 0;
 		
 		// add a lazer to the lazers
-		//this.lazers.add(var 
+		var half = this.width/2;
+		this.createBullet(this.x - half, this.y-half, this.LAZER_SPEED);
 	}
 	
 };

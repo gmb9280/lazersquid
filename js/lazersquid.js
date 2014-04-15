@@ -36,10 +36,11 @@ game.lazersquid =
 		
 		img.src = game.IMAGES['harmonImg'];
 		
+		
+		
 		this.harmon = game.harmon;
 		this.harmon.image = img;
 		this.harmon.init(this.WIDTH/2, this.HEIGHT/2);
-		
 		var bgimg = new Image();
 		bgimg.src = game.IMAGES['bg'];
 		this.bgimg = bgimg;
@@ -63,30 +64,8 @@ game.lazersquid =
 			return;
 		}
 
-
-		/*
-		// move sprites and such
-		this.moveSprites();
-		
-		this.checkCollisions();
-		
-		
-		// Draw the screen at last 
-		
-		game.draw.backgroundGradient(this.ctx, this.WIDTH, this.HEIGHT);
-		
-		this.drawSprites();
-		
-		// Draw HUD
-		drawHUD();
-		
-		// Loop - calls update at 60fps
-		
-		
-		*/
-		//game.draw.backgroundGradient(this.ctx, this.WIDTH, this.HEIGHT);
 		this.drawBG();
-		//console.log("Drawing");
+		
 		game.animationID = requestAnimationFrame(this.update.bind(this));
 		
 		this.drawSprites();
@@ -107,7 +86,7 @@ game.lazersquid =
 	
 	drawSprites : function()
 	{
-		this.harmon.draw(this.ctx);
+		this.harmon.draw(this.ctx); // some problem here
 	},
 	
 	moveSprites : function()
@@ -156,10 +135,9 @@ game.lazersquid =
 	{
 		if(!this.bgimg)
 		{
-			this.game.draw.backgroundGradient(this.ctx, this.WIDTH, this.HEIGHT);
+			//this.game.draw.backgroundGradient(this.ctx, this.WIDTH, this.HEIGHT);
 		}
-		else{
-		this.ctx.drawImage(this.bgimg, 0,0, this.WIDTH, this.HEIGHT); }
+		else{ this.ctx.drawImage(this.bgimg, 0,0, this.WIDTH, this.HEIGHT); }
 	},
 	
 	drawHUD : function()
