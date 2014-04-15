@@ -1,0 +1,16 @@
+// LAZERSQUID :: to-do list //
+
+-- 1. Modify: Shoom sound plays only once (first time up key pressed)
+-- 2. Fix glitch: Don't need to pause before able to play game (glitch)
+		- Also fix LAG OVER TIME glitch
+-- 3. Enemies: spawn, move, die, and collide
+-- 4. Levels (based on time or enemies killed)
+		- Number and difficulty of enemies increases depending on stage #
+		- Multiplier based on stage?
+		- Background color dependant on level
+-- 5. Score: based on enemies killed
+		- Multipliers based on how many enemies you kill in a row
+-- 6. Powerup lazer is different 
+
+
+-- **. Pickups: New lazer types
