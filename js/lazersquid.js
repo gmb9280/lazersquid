@@ -97,7 +97,8 @@ game.lazersquid =
 	drawPauseScreen : function(ctx)
 	{
 		ctx.save();
-		game.draw.backgroundGradient(this.ctx, this.WIDTH, this.HEIGHT);
+		this.drawBG();
+		//game.draw.backgroundGradient(this.ctx, this.WIDTH, this.HEIGHT);
 		ctx.textAlign = "center";
 		ctx.textBaseline = "middle";
 		game.draw.text(this.ctx, "PAUSED", this.WIDTH/2, this.HEIGHT/2, 60, "white");

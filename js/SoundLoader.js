@@ -17,7 +17,7 @@ function handleFileLoad(e)
 	if(e.src == "js/muzak/Goto80_-_3kr.ogg")
 	{
 		// start the soundtrack
-		createjs.Sound.play("bgm1", {loop:-1, volume:0.3});
+		//createjs.Sound.play("bgm1", {loop:-1, volume:0.3});
 	}
 }
 

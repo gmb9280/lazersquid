@@ -45,7 +45,7 @@ Modernizr.load(
 			{
 				game.paused = true;
 				game.keydown = []; // clear key demon
-				game.lazersquid.update(); // fAILS
+				game.lazersquid.update(); 
 			};
 			
 			window.onfocus = function()
