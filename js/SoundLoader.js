@@ -10,11 +10,12 @@ createjs.Sound.registerSound( { id:"death", src:"js/sound/lostlife.ogg" } );
 createjs.Sound.registerSound( { id:"pow", src:"js/sound/splode.ogg" } );
 createjs.Sound.addEventListener("fileload", handleFileLoad);
 
-console.log("Sound loader accessed.");
+//console.log("Sound loader accessed.");
 
+// fires on load
 function handleFileLoad(e)
 {
-	console.log("Preloaded Sound: ", e.id, e.src);
+	//console.log("Preloaded Sound: ", e.id, e.src);
 	if(e.src == "js/muzak/Goto80_-_3kr.ogg")
 	{
 		// start the soundtrack

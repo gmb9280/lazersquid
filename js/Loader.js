@@ -19,7 +19,7 @@ game.IMAGES =
 };
 
 
-
+// load everything
 Modernizr.load(
 	{
 		load: 
@@ -39,9 +39,10 @@ Modernizr.load(
 			
 		],
 			
+			// on complete
 		complete: function()
 		{
-			console.log("Loading complete with Modernizr.");
+			//console.log("Loading complete with Modernizr.");
 			// and other stuff you might need upon everything having been loaded
 			
 			window.onblur = function()

@@ -31,6 +31,7 @@ game.lazersquid =
 	
 	curStageCtr : 0,
 	
+	// initialize
 	init : function()
 	{
 		this.canvas = document.querySelector('canvas');
@@ -71,7 +72,7 @@ game.lazersquid =
 		this.update();
 	},
 	
-	
+	// check collisions, duh
 	checkCollisions : function()
 	{
 		// check all jellies 
@@ -96,7 +97,7 @@ game.lazersquid =
 							this.score += 5;
 							var s= createjs.Sound.play("pow", {loop:0, volume:1});
 							s.play();
-							console.log("HIT!");
+							//console.log("HIT!");
 						}
 						
 					} // end check for bullet
@@ -117,6 +118,7 @@ game.lazersquid =
 		}
 	},
 	
+	// update
 	update : function()
 	{
 		game.draw.clear(this.ctx, 0,0, this.WIDTH, this.HEIGHT);
@@ -129,7 +131,7 @@ game.lazersquid =
 		}
 		if (game.paused)
 		{
-			console.log("paused");
+			//console.log("paused");
 			this.drawPauseScreen(this.ctx);
 			return;
 		}
@@ -162,12 +164,13 @@ game.lazersquid =
 		game.animationID = requestAnimationFrame(this.update.bind(this));
 	},
 	
+	// reset (not used yet)
 	reset : function(ctx)
 	{
 		this.endBGM();
 		this.doBGM("bgm1");
 		this.stage = 0;
-		console.log("reset called");
+		//console.log("reset called");
 		this.harmon.reset();
 		this.jellyfishes.reset();
 		this.gameover = false;

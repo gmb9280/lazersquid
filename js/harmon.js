@@ -10,7 +10,7 @@ game.harmon =
 	y : game.HEIGHT/2,
 	width : 100, 
 	height : 100,
-	lives: 1,
+	lives: 5,
 	
 	// physics stuff
 	velocx : 0,
@@ -72,7 +72,7 @@ game.harmon =
 		this.frameDelay = 0;
 		this.frameDelayInc = 1/32;
 		this.velocx = this.velocy = this.accelx = this.accely = this.friction = 0;
-		console.log("New Harmon created at " + this.x + ", " + this.y);
+		//console.log("New Harmon created at " + this.x + ", " + this.y);
 	},
 	
 	reset : function()
@@ -87,7 +87,7 @@ game.harmon =
 		this.frameDelay = 0;
 		this.frameDelayInc = 1/32;
 		this.velocx = this.velocy = this.accelx = this.accely = this.friction = 0;
-		console.log("New Harmon created at " + this.x + ", " + this.y);
+		//console.log("New Harmon created at " + this.x + ", " + this.y);
 	},
 	
 	draw : function(ctx)
@@ -195,7 +195,7 @@ game.harmon =
 			if(this.velocy >= -.3 && this.velocy !=0)
 			{
 				this.SQUIDSTATE = this.STATE_IDLE;
-				console.log("switching state");
+				//console.log("switching state");
 				this.velocx = this.velocy = 0;	
 			}
 		}
@@ -213,7 +213,7 @@ game.harmon =
 			this.frame = 2;
 			if(this.velocy <= .3 && this.velocy !=0)
 			{
-				console.log("switching state");
+				//console.log("switching state");
 				this.SQUIDSTATE = this.STATE_IDLE;
 				this.velocx = this.velocy = 0;
 				
@@ -249,7 +249,7 @@ game.harmon =
 	
 	shoom : function(dt)
 	{
-		console.log("should play sound");
+		//console.log("should play sound");
 		if(this.SQUIDSTATE != this.STATE_SHOOM)
 		{
 			var sh = createjs.Sound.play("shoom", {loop:0, volume:1});
@@ -282,7 +282,7 @@ game.harmon =
 
 	charge : function(dt)
 	{
-		console.log("Chargin....");
+		//console.log("Chargin....");
 		this.powerupIndex++;
 		this.SQUIDSTATE = this.STATE_POWERUP; 
 	},
@@ -290,7 +290,7 @@ game.harmon =
 	fire : function(dt)
 	{
 		// release the kraken -- err, lazer.
-		console.log("Fire: " + this.powerupIndex);
+		//console.log("Fire: " + this.powerupIndex);
 		var sh = createjs.Sound.play("l1", {loop:0, volume:1});
 		this.SQUIDSTATE = this.STATE_FIRE;
 		this.frame = 0;
@@ -314,14 +314,14 @@ game.harmon =
 		if(this.deathCooldown < this.MAX_DEATH_COOLDOWN)
 		{
 			// don't take the hit, we're still recovering
-			console.log("still recovering: " + this.deathCooldown + "/ "  + this.MAX_DEATH_COOLDOWN);
+			//console.log("still recovering: " + this.deathCooldown + "/ "  + this.MAX_DEATH_COOLDOWN);
 		}
 		
 		else if(this.deathCooldown == this.MAX_DEATH_COOLDOWN)
 		{
 			var d= createjs.Sound.play("death", {loop:0, volume:1});
 			d.play();
-			console.log("Took the hit.");
+			//console.log("Took the hit.");
 			this.lives--;
 			
 			if(this.lives == 0)
@@ -339,7 +339,7 @@ game.harmon =
 	die : function()
 	{
 		game.lazersquid.gameover = true;
-		console.log("dead");
+		//console.log("dead");
 		
 	}
 	

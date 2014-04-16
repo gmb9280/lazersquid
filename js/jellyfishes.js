@@ -20,20 +20,23 @@ game.jellyfishes =
 	MAX_COOLDOWN : 100,
 	width: 70,
 	
+	// initializes
 	init : function()
 	{
 		this.enemies = new Array();
-		console.log("Jellyfishes initialized. Ready to rumble!");
+		//console.log("Jellyfishes initialized. Ready to rumble!");
 	},
 	
+	// reset (not used for now)
 	reset : function()
 	{
 		this.speed = 1;
 		this.MAX_JELLIES = 3;
 		this.enemies = new Array();
-		console.log("jellies reset");
+		//console.log("jellies reset");
 	},
 	
+	// draws all jellies and updates
 	draw : function(ctx)
 	{
 		for(var i = 0; i<this.enemies.length; i++)

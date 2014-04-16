@@ -1,0 +1,41 @@
+Documentation : Lazersquid
+by Gabrielle Bennett
+
+Changes from original design: 
+
+I didn't add in the multiple types of lazers : I simply didn't have enough time.
+Also, the game is not side-scrolling but top-to-bottom scrolling. It fits better with my animations 
+and cohesiveness/ease of viewing. 
+
+Requirements: 
+
+Sound: 
+	I have background music, shooting effects, movement effects, and sound feedback for when an enemy is killed.
+	Extra:  There are multiple background sounds (advance far enough to hear them -levels 3 and 8).
+	
+Images: 
+	Consistent style : I made everything myself, including the animated bits. They're all pixel art.
+Drawing: everything is canvas.
+
+Interaction
+	Player controls Harmon the cuttlefish with arrow keys and spacebar. 
+	
+Game Screens: 
+	Well, I only have 3: playing, pause, and gameover. No instructions (I forgot).
+
+	Visible score and states. 
+	
+	Difficulty: game begins easy, then enemies get faster and greater in number. 
+	
+Game design requirements: 
+	Sprite behavior: I worked waaay too much on this, and spent a lot of time getting the 
+	animation and animation states just right. It feels fun to navigate in general.
+	
+	Player choices matter, especially in later levels. It's faster to move upwards than anything,
+	which adds a unique gameplay element. I think it's really fun.
+	
+OOP / Coding standards: 
+	Everything is commented and in the requested module format. 
+	No errors. Use strict utilized. 
+	Use object literals especially for bullets, etc. 
+	Commented. 
