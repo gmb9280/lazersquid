@@ -26,14 +26,17 @@ Modernizr.load(
 		[
 			'http://code.createjs.com/soundjs-0.5.2.min.js',
 			'js/SoundLoader.js',
-			'js/harmon.js',
-			'js/draw.js',
-			'js/utilities.js',
-			'js/lazersquid.js',		
-			
 			game.IMAGES['harmonImg'],
 			game.IMAGES['jellyImg'],
-			game.IMAGES['bg']
+			game.IMAGES['bg'],
+			'js/harmon.js',
+			'js/jellyfishes.js',
+			'js/draw.js',
+			'js/utilities.js',
+			
+			'js/lazersquid.js'
+			
+			
 		],
 			
 		complete: function()
@@ -56,18 +59,21 @@ Modernizr.load(
 			
 			// event listeners
 			window.addEventListener("keydown",function(e){
-				console.log("keydown=" + e.keyCode);
+				//console.log("keydown=" + e.keyCode);
 				game.keydown[e.keyCode] = true;
 			});
 				
 			window.addEventListener("keyup",function(e){
-				console.log("keyup=" + e.keyCode);
+				//console.log("keyup=" + e.keyCode);
 				game.keydown[e.keyCode] = false;
 			});
 			
 			
 			// init game
+			game.keydown = []; // clear key demon
+			game.jellyfishes.init();
 			game.lazersquid.init();
+			
 		},
 		
 		

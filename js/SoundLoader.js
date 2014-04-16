@@ -6,7 +6,8 @@ createjs.Sound.registerSound( { id:"bgm2", src:"js/muzak/RoccoW_seabattlesinspac
 createjs.Sound.registerSound( { id:"bgm3", src:"js/muzak/Goto80_-_5pyhun73r_3l337_v3r.ogg" } );
 createjs.Sound.registerSound( { id:"shoom", src:"js/sound/shoom.ogg" } );
 createjs.Sound.registerSound( { id:"l1", src:"js/sound/lazer_1.ogg" } );
-
+createjs.Sound.registerSound( { id:"death", src:"js/sound/lostlife.ogg" } );
+createjs.Sound.registerSound( { id:"pow", src:"js/sound/splode.ogg" } );
 createjs.Sound.addEventListener("fileload", handleFileLoad);
 
 console.log("Sound loader accessed.");
@@ -18,6 +19,7 @@ function handleFileLoad(e)
 	{
 		// start the soundtrack
 		//createjs.Sound.play("bgm1", {loop:-1, volume:0.3});
+		
 	}
 }
 

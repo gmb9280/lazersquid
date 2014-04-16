@@ -10,7 +10,7 @@ game.harmon =
 	y : game.HEIGHT/2,
 	width : 100, 
 	height : 100,
-	lives: 5,
+	lives: 1,
 	
 	// physics stuff
 	velocx : 0,
@@ -37,11 +37,16 @@ game.harmon =
 	
 	lazers : [], 
 	
-	LAZER_SPEED : 1,
+	LAZER_SPEED : 5,
+	
+	LAZER_WIDTH : 10,
 	
 	fireDelay : 3,
 	
 	curFireDelay : 0,
+	
+	powerupIndex : 0,
+	
 	frame : 0,
 	
 	friction: .8,
@@ -52,12 +57,31 @@ game.harmon =
 	
 	frameDelayInc : 1/5,
 	
+	deathCooldown : 100,
+	
+	MAX_DEATH_COOLDOWN : 100,
+	
 	init : function(_x,_y)
 	{
 		this.lazers = new Array();
 		this.width = 100;
 		this.x = _x;
 		this.y = _y;
+		this.friction = .99;
+		this.frame = 0;
+		this.frameDelay = 0;
+		this.frameDelayInc = 1/32;
+		this.velocx = this.velocy = this.accelx = this.accely = this.friction = 0;
+		console.log("New Harmon created at " + this.x + ", " + this.y);
+	},
+	
+	reset : function()
+	{
+		this.x = 300;
+		this.y = 200;
+		this.lazers = new Array();
+		this.width = 100;
+		this.lives = 5;
 		this.friction = .99;
 		this.frame = 0;
 		this.frameDelay = 0;
@@ -81,38 +105,60 @@ game.harmon =
 			ctx.drawImage(this.image,0, 0  + (this.frame * this.width),100,100, this.x - half, this.y - half, this.width, this.width);
 		}
 		
+		this.drawBullets(ctx);
 		// draw bullets
-		//this.drawBullets(ctx);
+
+		//update death cooldown
+		if(this.deathCooldown < this.MAX_DEATH_COOLDOWN && this.deathCooldown > 0)
+		{
+			this.deathCooldown --;
+		}
+		else if(this.deathCooldown == 0)
+		{
+			this.deathCooldown = this.MAX_DEATH_COOLDOWN;
+		}
 		
 	},
 	
 	// Makes a bullet and adds it to the bullets array (private)
-	createBullet : function(x_, y_, speed_)
+	createBullet : function(x_, y_, width_, speed_) 
 	{
-		/*var b_ = {x: x_, y:y_, speed: speed_};
-		*/
-		this.lazers.push("lazer?");
+		var b_ = {x: x_, y:y_, width : width_, speed: speed_};
+		
+		this.lazers.push(b_);
 	},
 	
-	drawBullet : function(ctx)
+	drawBullets : function(ctx)
 	{
-		game.draw.rect(ctx, this.lazers[i].x, this.lazers[i].y, 3,3, "red");		
-	},
 	
-	update : function()
-	{
-		//console.log("velocity: " + this.velocx + ", " + this.velocy + " state: " + this.SQUIDSTATE );
-
-		// handles lazers
 		if(this.lazers.length == 0){ //no lazers 
 		}
 		else
 		{
 			for(var i = 0; i< this.lazers.length; i++)
 			{
-				console.log(i + "/" + this.lazers.length + " lazers...");
+				//console.log("Drawing lazer " + i);
+				game.draw.rect(ctx, this.lazers[i].x - this.lazers[i].width/2, this.lazers[i].y, this.lazers[i].width, this.LAZER_WIDTH, "red");	
+				this.lazers[i].y -= this.lazers[i].speed;
+			//game.draw.rect(ctx, this.lazers[i].x, this.lazers[i].y, 20,20, "white");
+				
+			
+				if(this.lazers[i].y <= 0)
+				{
+					// remove lazers that are off the screen
+					this.lazers.splice(i, 1);
+				}
+				
 			}
 		}
+			
+	},
+	
+	update : function()
+	{
+		//console.log("velocity: " + this.velocx + ", " + this.velocy + " state: " + this.SQUIDSTATE );
+
+
 		
 		
 		// Handles animation 
@@ -215,12 +261,14 @@ game.harmon =
 	
 	strafeRight : function(dt)
 	{
+		if(this.SQUIDSTATE == this.STATE_POWERUP){ return; }
 		this.velocx = (this.BOOST_AMT_HORZ);
 		this.SQUIDSTATE = this.STATE_STRAFE_RIGHT;
 	},
 	
 	strafeLeft : function(dt)
 	{
+	if(this.SQUIDSTATE == this.STATE_POWERUP){ return; }
 		this.velocx = -(this.BOOST_AMT_HORZ);
 		this.SQUIDSTATE = this.STATE_STRAFE_LEFT;
 	},
@@ -235,20 +283,64 @@ game.harmon =
 	charge : function(dt)
 	{
 		console.log("Chargin....");
+		this.powerupIndex++;
 		this.SQUIDSTATE = this.STATE_POWERUP; 
 	},
 	
 	fire : function(dt)
 	{
 		// release the kraken -- err, lazer.
-		console.log("Fire");
+		console.log("Fire: " + this.powerupIndex);
 		var sh = createjs.Sound.play("l1", {loop:0, volume:1});
 		this.SQUIDSTATE = this.STATE_FIRE;
 		this.frame = 0;
 		
 		// add a lazer to the lazers
 		var half = this.width/2;
-		this.createBullet(this.x - half, this.y-half, this.LAZER_SPEED);
+		if(this.powerupIndex > this.LAZER_WIDTH)
+		{
+			this.createBullet(this.x, this.y-half, this.powerupIndex, this.LAZER_SPEED)
+		}
+		else
+		{
+			this.createBullet(this.x, this.y-half, this.LAZER_WIDTH, this.LAZER_SPEED);
+		}
+		this.powerupIndex = 0;
+	},
+	
+	takehit : function()
+	{
+		if(this.lives <= 0) { this.die(); }
+		if(this.deathCooldown < this.MAX_DEATH_COOLDOWN)
+		{
+			// don't take the hit, we're still recovering
+			console.log("still recovering: " + this.deathCooldown + "/ "  + this.MAX_DEATH_COOLDOWN);
+		}
+		
+		else if(this.deathCooldown == this.MAX_DEATH_COOLDOWN)
+		{
+			var d= createjs.Sound.play("death", {loop:0, volume:1});
+			d.play();
+			console.log("Took the hit.");
+			this.lives--;
+			
+			if(this.lives == 0)
+			{ 
+				this.die(); 
+			}
+			
+			else{
+			
+				this.deathCooldown--; // start timer
+			}
+		}
+	},
+	
+	die : function()
+	{
+		game.lazersquid.gameover = true;
+		console.log("dead");
+		
 	}
 	
 };

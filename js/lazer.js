@@ -5,4 +5,4 @@ var game = game || {};
 game.lazer = 
 {
 
-}
+};

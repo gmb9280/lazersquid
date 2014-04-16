@@ -26,13 +26,13 @@ game.draw =
 	
 	backgroundGradient: function(ctx, width, height)
 	{
-		// Create gradient
-		//var grd = ctx.createLinearGradient(width/2, 0, width/2, height);
+		//Create gradient
+		var grd = ctx.createLinearGradient(width/2, 0, width/2, height);
 		
-		//grd.addColorStop(0, '#48cfa9'); 
-		//grd.addColorStop(1, '#134045');
+		grd.addColorStop(0, '#48cfa9'); 
+		grd.addColorStop(1, '#134045');
 		
-		//ctx.fillStyle= "black";
-		//ctx.fillRect(0,0,width,height);
+		ctx.fillStyle= grd;
+		ctx.fillRect(0,0,width,height);
 	}
-}
+};
