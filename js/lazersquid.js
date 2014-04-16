@@ -141,6 +141,7 @@ game.lazersquid =
 			this.stage ++;
 			this.jellyfishes.MAX_JELLIES += 2;
 			this.jellyfishes.speed += .2;
+			this.jellyfishes.MAX_COOLDOWN -= 2;
 			//console.log("Advanced to stage: " + this.stage);
 			
 			if(this.stage == 3)
